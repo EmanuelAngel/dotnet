@@ -1,0 +1,73 @@
+# Archivos de sistema
+.DS_Store
+Thumbs.db
+
+# Archivos de compilación
+bin/
+obj/
+out/
+
+# Archivos de usuario de Visual Studio
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+
+# Configuración de VSCode
+.vscode/
+
+# Archivos generados por paquetes
+*.log
+*.nupkg
+*.snupkg
+.nuget/
+packages/
+project.lock.json
+project.fragment.lock.json
+
+# Archivos de configuración de publicación
+publish/
+*.publishsettings
+.vs/
+
+# Configuración de sistema y entorno
+.env
+*.env
+.env.*
+Secrets/
+*.key
+
+# Archivos de compilación y dependencias
+*.dll
+*.exe
+*.pdb
+*.mdb
+*.cache
+*.deb
+*.pid
+*.tar.gz
+*.swp
+*.class
+*.war
+*.jar
+*.pyc
+*.db
+*.sqlite
+
+# Archivos de pruebas
+TestResults/
+*.coverage
+*.coveragexml
+*.trx
+*.testlog
+
+# Configuración de IDEs
+.idea/
+*.iml
+
+# Archivos de Docker
+docker-compose.override.yml
+.dockerignore
+
+# Otros
+*.rptproj.user
