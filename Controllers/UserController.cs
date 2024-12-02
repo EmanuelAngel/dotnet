@@ -15,4 +15,18 @@ public class UserController(ILogger<UserController> logger) : Controller
 
     return View(users);
   }
+
+  public IActionResult Edit(int id)
+  {
+    if (id == 0)
+    {
+      return View();
+    }
+    else
+    {
+      var user = _repo.FindOne(id);
+
+      return View(id);
+    }
+  }
 }

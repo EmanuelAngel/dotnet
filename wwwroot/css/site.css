@@ -1,22 +1,22 @@
-html {
-  font-size: 14px;
-}
+/* Pico CSS Framework */
+@import url("./pico.indigo.min.css");
 
-@media (min-width: 768px) {
-  html {
-    font-size: 16px;
-  }
-}
+/* Pico CSS Colors Palette */
+@import url("./pico.colors.min.css");
 
-.btn:focus, .btn:active:focus, .btn-link.nav-link:focus, .form-control:focus, .form-check-input:focus {
-  box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem #258cfb;
-}
-
-html {
-  position: relative;
-  min-height: 100%;
-}
+/* Font Awesome icons */
+@import url("./all.min.css");
 
 body {
-  margin-bottom: 60px;
+    min-height: 100dvh; /* Ensures body spans the full height of the viewport. */
+    display: flex;
+    flex-direction: column;
+    margin: 0;
+}
+
+#Footer {
+    width: 100%;
+    margin-top: auto; /* Pushes the footer to the bottom when the content is less. */
+    background-color: #f8f9fa; /* Optional: To make it visually distinct. */
+    text-align: center; /* Optional: Center text for the footer. */
 }

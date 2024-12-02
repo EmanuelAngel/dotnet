@@ -4,7 +4,25 @@
   ViewData["title"] = "Users";
 }
 
-<table class="table">
+@* @section Styles {
+  <link rel="stylesheet" href="https://cdn.datatables.net/2.1.8/css/dataTables.dataTables.min.css">
+}
+
+@section Scripts {
+  <script src="https://cdn.datatables.net/2.1.8/js/dataTables.min.js"></script>
+  <script>
+    const userTable = new DataTable('#user-table', {
+      responsive: true
+    });
+  </script>
+} *@
+
+<hgroup>
+  <h1>Users</h1>
+  <p>View all users entries.</p>
+</hgroup>
+
+<table id="user-table" class="overflow-auto striped">
   <thead>
     <tr>
       <th>
@@ -41,9 +59,38 @@
           @Html.DisplayFor(userItem => user.Role)
         </td>
         <td>
-          @Html.ActionLink("Edit", "Edit", new { id = user.Id }) |
-          @Html.ActionLink("Details", "Details", new { id = user.Id }) |
-          @Html.ActionLink("Delete", "Delete", new { id = user.Id })
+          <nav>
+            <ul>
+              <li>
+                <a
+                  class="secondary"
+                  href="@Url.Action("Edit", "User", new { id = user.Id })"
+                  data-tooltip="Edit"
+                  data-placement="left">
+                    <i class="fa-solid fa-pencil"></i>
+                </a>
+              </li>
+              <li>
+                <a
+                  class="contrast"
+                  href="@Url.Action("Details", "User", new { id = user.Id })"
+                  data-tooltip="Details"
+                  data-placement="left">
+                    <i class="fa-solid fa-address-card"></i>
+                </a>
+              </li>
+              <li>
+                <a
+                  href="@Url.Action("Delete", "User", new { id = user.Id })"
+                  data-tooltip="Delete"
+                  data-placement="left">
+                    <del>
+                      <i class="fa-solid fa-trash"></i>
+                    </del>
+                </a>
+              </li>
+            </ul>
+          </nav>
         </td>
       </tr>
     }
