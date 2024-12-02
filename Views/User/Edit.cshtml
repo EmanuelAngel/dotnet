@@ -1,0 +1,46 @@
+@model init.Models.User
+
+@{
+  ViewData["title"] = "User";
+}
+
+<hgroup>
+  <h1>User</h1>
+  <p>Edit user entry.</p>
+</hgroup>
+
+<form asp-action="Save" method="POST">
+  <div asp-validation-summary="ModelOnly" class="u-text--danger"></div>
+  @if (Model != null)
+  {
+    <fieldset>
+      <label asp-for="Id"></label>
+      <input asp-for="Id" readonly>
+    </fieldset>
+  }
+  <fieldset>
+    <label asp-for="Name"></label>
+    <input asp-for="Name">
+    <span asp-validation-for="Name" class="u-text--danger"></span>
+  </fieldset>
+  <fieldset>
+    <label asp-for="Email"></label>
+    <input asp-for="Email" type="email">
+    <span asp-validation-for="Email" class="u-text--danger"></span>
+  </fieldset>
+  @if (Model != null)
+  {
+    <fieldset>
+      <label asp-for="Role"></label>
+      <input asp-for="Role" readonly>
+    </fieldset>
+  }
+  <fieldset>
+    <input type="submit" value="Save">
+  </fieldset>
+</form>
+
+<a asp-action="Index">
+  <i class="fa-solid fa-arrow-left"></i>
+  Go back
+</a>

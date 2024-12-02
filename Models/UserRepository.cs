@@ -118,6 +118,60 @@ public class UserRepository
 
   public int Edit(int id, User user)
   {
-    return -1;
+    int res = -1;
+
+    using (MySqlConnection connection = new(ConnectionString))
+    {
+      var query = $@"
+        UPDATE users
+        SET
+          name = @name,
+          email = @email,
+          role = @role
+        WHERE id = @id;
+      ";
+
+      using (MySqlCommand command = new(query, connection))
+      {
+        command.Parameters.AddWithValue("@id", id);
+        command.Parameters.AddWithValue("@name", user.Name);
+        command.Parameters.AddWithValue("@email", user.Email);
+        command.Parameters.AddWithValue("@role", user.Role);
+
+        connection.Open();
+
+        res = command.ExecuteNonQuery();
+
+        connection.Close();
+      }
+    }
+
+    return res;
+  }
+
+  public int Delete(int id)
+  {
+    int res = -1;
+
+    using (MySqlConnection connection = new(ConnectionString))
+    {
+      var query = $@"
+        DELETE FROM users
+        WHERE id = @id;
+      ";
+
+      using (MySqlCommand command = new(query, connection))
+      {
+        command.Parameters.AddWithValue("@id", id);
+
+        connection.Open();
+
+        res = command.ExecuteNonQuery();
+
+        connection.Close();
+      }
+    }
+
+    return res;
   }
 }

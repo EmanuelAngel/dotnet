@@ -7,6 +7,11 @@
 /* Font Awesome icons */
 @import url("./all.min.css");
 
+/* Custom utilities */
+@import url("./utilities.css");
+
+/* Global styles */
+
 body {
     min-height: 100dvh; /* Ensures body spans the full height of the viewport. */
     display: flex;
@@ -29,3 +34,5 @@ body {
 .ThemeSwitcher-checkbox {
     margin: 0 .3rem;
 }
+
+input[readonly] { cursor: not-allowed; }
