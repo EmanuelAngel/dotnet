@@ -71,3 +71,4 @@ docker-compose.override.yml
 
 # Otros
 *.rptproj.user
+.idx

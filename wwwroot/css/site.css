@@ -14,11 +14,10 @@ body {
     margin: 0;
 }
 
-#Footer {
+.Footer {
     width: 100%;
     margin-top: auto; /* Pushes the footer to the bottom when the content is less. */
-    background-color: #f8f9fa; /* Optional: To make it visually distinct. */
-    text-align: center; /* Optional: Center text for the footer. */
+    text-align: end; /* Optional: Center text for the footer. */
 }
 
 .ThemeSwitcher {
