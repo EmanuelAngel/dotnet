@@ -52,13 +52,13 @@ public class UserRepository
     using (MySqlConnection connection = new(ConnectionString))
     {
       var query = $@"
-      SELECT
-        id,
-        name,
-        email,
-        role
-      FROM users
-      WHERE id = @id;
+        SELECT
+          id,
+          name,
+          email,
+          role
+        FROM users
+        WHERE id = @id;
       ";
 
       using (MySqlCommand command = new(query, connection))
