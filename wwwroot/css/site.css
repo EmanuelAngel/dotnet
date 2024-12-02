@@ -20,3 +20,13 @@ body {
     background-color: #f8f9fa; /* Optional: To make it visually distinct. */
     text-align: center; /* Optional: Center text for the footer. */
 }
+
+.ThemeSwitcher {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.ThemeSwitcher-checkbox {
+    margin: 0 .3rem;
+}
