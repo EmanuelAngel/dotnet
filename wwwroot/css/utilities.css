@@ -1,3 +1,9 @@
 .u-text--danger {
-    color: red;
+    color: darkred;
 }
+
+[data-theme="dark"] .u-text--danger {
+    color: lightcoral;
+}
+
+.u-cursor--pointer { cursor: pointer }

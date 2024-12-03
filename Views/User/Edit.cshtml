@@ -2,11 +2,13 @@
 
 @{
   ViewData["title"] = "User";
+
+
 }
 
 <hgroup>
-  <h1>User</h1>
-  <p>Edit user entry.</p>
+  <h1>@(Model.Id == 0 ? "Create" : "Edit") User</h1>
+  <p>@(Model.Id == 0 ? "Create a new" : "Edit") user entry.</p>
 </hgroup>
 
 <form asp-action="Save" method="POST">

@@ -3,6 +3,21 @@
 @{
   ViewData["title"] = "Users";
 }
+
+@if (TempData["SuccessMessage"] != null)
+{
+  <div class="alert alert-success">
+    @TempData["SuccessMessage"]
+  </div>
+}
+
+@if (TempData["ErrorMessage"] != null)
+{
+  <div class="alert alert-danger">
+    @TempData["ErrorMessage"]
+  </div>
+}
+
 <section>
   <hgroup>
     <h1>Users</h1>
@@ -15,77 +30,131 @@
   </a>
 </section>
 
-<table id="user-table" class="overflow-auto striped">
-  <thead>
-    <tr>
-      <th>
-        @Html.DisplayNameFor(model => model.Id)
-      </th>
-      <th>
-        @Html.DisplayNameFor(model => model.Name)
-      </th>
-      <th>
-        @Html.DisplayNameFor(model => model.Email)
-      </th>
-      <th>
-        @Html.DisplayNameFor(model => model.Role)
-      </th>
-      <th>
-        Actions
-      </th>
-    </tr>
-  </thead>
-  <tbody>
-    @foreach (var user in Model)
-    {
+<section class="overflow-auto">
+  <table id="user-table" class="striped">
+    <thead>
       <tr>
-        <td>
-          @Html.DisplayFor(userItem => user.Id)
-        </td>
-        <td>
-          @Html.DisplayFor(userItem => user.Name)
-        </td>
-        <td>
-          @Html.DisplayFor(userItem => user.Email)
-        </td>
-        <td>
-          @Html.DisplayFor(userItem => user.Role)
-        </td>
-        <td>
-          <nav>
-            <ul>
-              <li>
-                <a
-                  class="secondary"
-                  href="@Url.Action("Edit", "User", new { id = user.Id })"
-                  data-tooltip="Edit"
-                  data-placement="left">
-                    <i class="fa-solid fa-pencil"></i>
-                </a>
-              </li>
-              <li>
-                <a
-                  class="contrast"
-                  href="@Url.Action("Details", "User", new { id = user.Id })"
-                  data-tooltip="Details"
-                  data-placement="left">
-                    <i class="fa-solid fa-address-card"></i>
-                </a>
-              </li>
-              <li>
-                <a
-                  href="@Url.Action("Delete", "User", new { id = user.Id })"
-                  data-tooltip="Delete"
-                  data-placement="left">
-                    <del>
-                      <i class="fa-solid fa-trash"></i>
-                    </del>
-                </a>
-              </li>
-            </ul>
-          </nav>
-        </td>
+        <th>
+          @Html.DisplayNameFor(model => model.Id)
+        </th>
+        <th>
+          @Html.DisplayNameFor(model => model.Name)
+        </th>
+        <th>
+          @Html.DisplayNameFor(model => model.Email)
+        </th>
+        <th>
+          @Html.DisplayNameFor(model => model.Role)
+        </th>
+        <th>
+          Actions
+        </th>
       </tr>
-    }
-  </tbody>
-</table>
+    </thead>
+    <tbody>
+      @foreach (var user in Model)
+      {
+        <tr>
+          <td>
+            @Html.DisplayFor(userItem => user.Id)
+          </td>
+          <td>
+            @Html.DisplayFor(userItem => user.Name)
+          </td>
+          <td>
+            @Html.DisplayFor(userItem => user.Email)
+          </td>
+          <td>
+            @Html.DisplayFor(userItem => user.Role)
+          </td>
+          <td>
+            <nav>
+              <ul>
+                <li>
+                  <a
+                    class="secondary"
+                    href="@Url.Action("Edit", "User", new { id = user.Id })"
+                    data-tooltip="Edit"
+                    data-placement="left">
+                      <i class="fa-solid fa-pencil"></i>
+                  </a>
+                </li>
+                <li>
+                  <a
+                    class="contrast"
+                    href="@Url.Action("Details", "User", new { id = user.Id })"
+                    data-tooltip="Details"
+                    data-placement="left">
+                      <i class="fa-solid fa-address-card"></i>
+                  </a>
+                </li>
+                <li>
+                  <a
+                    href="confirm-delete"
+                    data-tooltip="Delete"
+                    data-placement="left"
+                    data-target="confirm-delete"
+                    data-id="@user.Id"
+                    onclick="toggleModal(event)"
+                    >
+                    <i class="fa-solid fa-trash u-text--danger"></i>
+                  </a>
+                </li>
+              </ul>
+            </nav>
+          </td>
+        </tr>
+      }
+    </tbody>
+  </table>
+</section>
+
+<dialog id="confirm-delete">
+  <article>
+    <header>
+      <button
+        aria-label="Close"
+        rel="prev"
+        data-target="confirm-delete"
+        onclick="toggleModal(event)"
+      ></button>
+      <h3>Confirm your action!</h3>
+    </header>
+    <p>
+      This action will delete this user and its data will be lost forever.
+      Are you sure?
+    </p>
+    <footer>
+      <form
+        asp-action="Delete"
+        method="post"
+        style="display: flex; gap: .5rem; justify-content: end;"
+        >
+        <button
+          style="width: max-content; height: 100%;"
+          autofocus
+          class="secondary"
+          data-target="confirm-delete"
+          onclick="toggleModal(event)"
+          >
+          Cancel
+        </button>
+
+        <input
+          type="hidden"
+          name="Id"
+          value=""
+          style="display: none;"
+          />
+
+        <button
+          style="width: max-content; height: 100%; margin: 0;"
+          type="submit"
+          class="contrast"
+          >
+          Confirm
+        </button>
+      </form>
+    </footer>
+  </article>
+</dialog>

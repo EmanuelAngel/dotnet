@@ -11,45 +11,87 @@ public class UserController(ILogger<UserController> logger) : Controller
 
   public IActionResult Index()
   {
-    var users = _repo.FindMany();
+    try
+    {
+      var users = _repo.FindMany();
 
-    return View(users);
+      return View(users);
+    }
+    catch (Exception)
+    {
+      throw;
+    }
   }
 
   public IActionResult Edit(int id)
   {
-    if (id == 0)
-      return View();
-    else
+    try
+    {
+      if (id == 0)
+        return View(new User());
+      else
+      {
+        var user = _repo.FindOne(id);
+        return View(user);
+      }
+    }
+    catch (Exception)
+    {
+      throw;
+    }
+  }
+
+  [HttpPost]
+  [ValidateAntiForgeryToken]
+  public IActionResult Save(User user)
+  {
+    try
+    {
+      if (ModelState.IsValid)
+      {
+        if (user.Id == 0)
+          _repo.Create(user);
+        else
+          _repo.Edit(user.Id, user);
+
+        TempData["SuccessMessage"] = user.Id == 0
+          ? "User created successfully."
+          : "User updated successfully.";
+
+        return RedirectToAction("Index");
+      }
+
+      // If model is not valid, return to the edit view with the current user object
+      return View("Edit", user);
+    }
+    catch (Exception)
+    {
+      throw;
+    }
+  }
+
+  [HttpPost]
+  [ValidateAntiForgeryToken]
+  public IActionResult Delete(int id)
+  {
+    try
     {
       var user = _repo.FindOne(id);
 
-      return View(user);
+      if (user == null)
+      {
+        return NotFound();
+      }
+
+      _repo.Delete(id);
+      
+      TempData["SuccessMessage"] = "User successfully deleted.";
+
+      return RedirectToAction("Index");
     }
-  }
-
-  [HttpPost]
-  public IActionResult Save(int id, User user)
-  {
-    id = user.Id;
-
-    if (id == 0)
+    catch (Exception)
     {
-        _repo.Create(user);
+      throw;
     }
-    else
-    {
-        _repo.Edit(id, user);
-    }
-
-    return RedirectToAction("Index");
-  }
-
-  [HttpPost]
-  public IActionResult Delete(int id)
-  {
-    _repo.Delete(id);
-
-    return RedirectToAction("Index");
   }
 }
