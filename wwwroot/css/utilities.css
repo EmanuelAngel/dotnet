@@ -1,9 +1,5 @@
-.u-text--danger {
-    color: darkred;
-}
+/* Action based utilities */
+.u-text--danger { color: var(--red-700); }
 
-[data-theme="dark"] .u-text--danger {
-    color: lightcoral;
-}
-
+/* Cursor utilities */
 .u-cursor--pointer { cursor: pointer }

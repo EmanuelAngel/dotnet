@@ -10,6 +10,12 @@
 /* Custom utilities */
 @import url("./utilities.css");
 
+/* Tailwind CSS Colors */
+@import url("./tailwindcss.colors.css");
+
+/* Tailwind CSS Colors Dark */
+@import url("./tailwindcss.dark.colors.css");
+
 /* Global styles */
 body {
     min-height: 100dvh;
